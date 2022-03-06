@@ -1,0 +1,1 @@
+python %~dp0manage.py runserver 8000

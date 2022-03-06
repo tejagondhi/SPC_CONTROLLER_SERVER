@@ -1,0 +1,55 @@
+.list-group{
+  max-height: 44vh;
+  margin-bottom: 10px;
+  overflow-y:auto;
+  -webkit-overflow-scrolling: touch;
+}
+.filter-form{
+  max-height: 44vh;
+  margin-bottom: 10px;
+  overflow-y:auto;
+  -webkit-overflow-scrolling: touch;
+}
+.thumbnails {
+  overflow: hidden;
+}
+.thumbnails li {
+  float: left;
+  width: 50%;
+  position: relative;
+  padding: 1px;
+  min-height: 500px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  overflow: hidden;
+}
+.thumbnails li img {
+  max-width: 100%;
+  display: block;
+  position: absolute;
+  max-height: 500px;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  left: 50%;
+}
+.empty-image{
+  position: absolute;
+  margin: auto;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+hr{
+  border: 1px solid gray;
+}
+.top-left-row-border{
+  border-right: 1px solid #d3d3d3;
+  border-bottom: 1px solid #d3d3d3;
+}
+.top-left-row-border-no-bottom{
+  border-right: 1px solid #d3d3d3;
+}
+.plankList{
+  margin-top: 10px;
+}

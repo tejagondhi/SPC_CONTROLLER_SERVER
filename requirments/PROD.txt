@@ -1,0 +1,4 @@
+django==4.0.2
+mysqlclient==2.1.0
+matplotlib==3.5.1
+scipy==1.8.0
