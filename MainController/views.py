@@ -88,7 +88,12 @@ def getGraphs(request):
             response = HttpResponse('some data')
             response.status_code = 500  # sample status code
             return response
-        responseData = ["TCWL_"+str(uniqueId)+".png","TCWR_"+str(uniqueId)+".png","BCWL_"+str(uniqueId)+".png","BCWR_"+str(uniqueId)+".png","ThicknessLeft_"+str(uniqueId)+".png","ThicknessRight_"+str(uniqueId)+".png","TopWidth_"+str(uniqueId)+".png","BottomWidth_"+str(uniqueId)+".png"]
+        responseData = ["TopWidth_"+str(uniqueId)+".png",
+        "BottomWidth_"+str(uniqueId)+".png",
+        "TCWL_"+str(uniqueId)+".png",
+        "TCWR_"+str(uniqueId)+".png",
+        "BCWL_"+str(uniqueId)+".png",
+        "BCWR_"+str(uniqueId)+".png",
+        "ThicknessLeft_"+str(uniqueId)+".png",
+        "ThicknessRight_"+str(uniqueId)+".png"]
         return JsonResponse(responseData, safe=False)
-
-

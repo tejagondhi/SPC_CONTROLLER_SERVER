@@ -34,7 +34,17 @@ $(document).ready(function() {
     })
 });
 
+let freezeClic = false; // just modify that variable to disable all clics events
+
+document.addEventListener("click", e => {
+    if (freezeClic) {
+        e.stopPropagation();
+        e.preventDefault();
+    }
+}, true);
+
 function listClick(id) {
+    freezeClic = true;
     $("#filtered-list>a.active").removeClass("active");
     $("#filtered-list #plank-"+id).addClass("active");
     document.getElementById("plot_gallery").innerHTML="";
@@ -45,6 +55,7 @@ function listClick(id) {
         method: 'POST',
         data: 'id='+ id,
         success: function(response) {
+            freezeClic = false;
             //const parsedResponse = JSON.parse(response);
             document.getElementById("nomatch").hidden = true;
             document.getElementById("loading").hidden = true;
@@ -53,6 +64,7 @@ function listClick(id) {
             }
         },
         error: function(msg){
+            freezeClic = false;
             document.getElementById("nomatch").hidden = false;
             document.getElementById("loading").hidden = true;
             swal ( "Oops" ,  "Something went wrong!" ,  "error" )
