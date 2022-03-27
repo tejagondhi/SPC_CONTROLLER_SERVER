@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 from scipy.stats import norm
 
-def generateGraphs(data, title, xlabel, ylabel, fileName):
+def generateGraphs(data, title, xlabel, ylabel, fileName,min,max):
     Figure(figsize = (7,7),dpi = 100)
     y = data
     mu, std = norm.fit(y)
@@ -17,4 +17,6 @@ def generateGraphs(data, title, xlabel, ylabel, fileName):
     x = np.linspace(xmin, xmax)
     p = norm.pdf(x, mu, std)
     plt.plot(x, p, 'k', linewidth=2)
+    plt.axvline(int(float(min)))
+    plt.axvline(int(float(max)))
     plt.savefig(fileName)

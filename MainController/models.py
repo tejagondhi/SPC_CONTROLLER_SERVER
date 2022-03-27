@@ -20,6 +20,31 @@ class MetaData(models.Model):
     class Meta:
         db_table = "metadata"
 
+
+class MeasuresData(models.Model):   
+    ID = models.BigIntegerField()
+    BladeType = models.CharField(max_length=100)
+    TopWidth_LDL = models.CharField(max_length=100)
+    TopWidth_UDL = models.CharField(max_length=100)
+    BottomWidth_LDL = models.CharField(max_length=100)
+    BottomWidth_UDL = models.CharField(max_length=100)
+    TopChamferWidthLeft_LDL = models.CharField(max_length=100)
+    TopChamferWidthLeft_UDL = models.CharField(max_length=100)
+    TopChamferWidthRight_LDL = models.CharField(max_length=100)
+    TopChamferWidthRight_UDL = models.CharField(max_length=100)
+    BottomChamferWidthLeft_LDL = models.CharField(max_length=100)
+    BottomChamferWidthLeft_UDL = models.CharField(max_length=100)
+    BottomChamferWidthRight_LDL = models.CharField(max_length=100)
+    BottomChamferWidthRight_UDL = models.CharField(max_length=100)
+    ThicknessLeft_LDL = models.CharField(max_length=100)
+    ThicknessLeft_UDL = models.CharField(max_length=100)
+    ThicknessRight_LDL = models.CharField(max_length=100)
+    ThicknessRight_UDL = models.CharField(max_length=100)
+    class Meta:
+        db_table = "measure_limits"
+
+
+
 #main Table
 def getPlankDataModel(dbTable):
     class PlankData(models.Model):  
@@ -28,10 +53,10 @@ def getPlankDataModel(dbTable):
         TCWR = models.CharField(max_length=100)
         BCWL = models.CharField(max_length=100)
         BCWR = models.CharField(max_length=100)
-        TotalThickness = models.CharField(max_length=100)
-        TopTotalWidth = models.CharField(max_length=100)
-        BottomTotalWidth = models.CharField(max_length=100)
-        FinalTotalWidth = models.CharField(max_length=100)
+        ThicknessLeft = models.CharField(max_length=100)
+        TopWidth = models.CharField(max_length=100)
+        BottomWidth = models.CharField(max_length=100)
+        ThicknessRight = models.CharField(max_length=100)
         class Meta:
             db_table = dbTable
     

@@ -8,6 +8,7 @@ from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
 from MainController.models import MetaData
 from MainController.models import getPlankDataModel
+from MainController.models import MeasuresData
 from django.views.decorators.csrf import csrf_exempt
 from django.core import serializers
 from MainController.plotGenerator import generateGraphs
@@ -62,25 +63,26 @@ def getGraphs(request):
             plankData = getPlankDataModel(plankTableName)
             plankData._meta.db_table = plankTableName
             data = plankData.objects.all()
+            measureObj = MeasuresData.objects.get(ID = 1)
             TCWL = list(map(float,data.values_list('TCWL',flat=True)))
             TCWR = list(map(float,data.values_list('TCWR',flat=True)))
             BCWL = list(map(float,data.values_list('BCWL',flat=True)))
             BCWR = list(map(float,data.values_list('BCWR',flat=True)))
-            TotalThickness = list(map(float,data.values_list('TotalThickness',flat=True)))
-            TopTotalWidth = list(map(float,data.values_list('TopTotalWidth',flat=True)))
-            BottomTotalWidth = list(map(float,data.values_list('BottomTotalWidth',flat=True)))
-            FinalTotalWidth = list(map(float,data.values_list('FinalTotalWidth',flat=True)))
+            ThicknessLeft = list(map(float,data.values_list('ThicknessLeft',flat=True)))
+            TopWidth = list(map(float,data.values_list('TopWidth',flat=True)))
+            BottomWidth = list(map(float,data.values_list('BottomWidth',flat=True)))
+            ThicknessRight = list(map(float,data.values_list('ThicknessRight',flat=True)))
             for f in os.listdir(settings.MEDIA_ROOT):
                 os.remove(os.path.join(settings.MEDIA_ROOT, f))
             uniqueId = uuid4()
-            generateGraphs(TCWL,"Top Champher Left", "TCWL", "Frequency", settings.MEDIA_ROOT + "\\TCWL_"+str(uniqueId)+".png")
-            generateGraphs(TCWR,"Top Champher Right", "TCWR", "Frequency", settings.MEDIA_ROOT + "\\TCWR_"+str(uniqueId)+".png")
-            generateGraphs(BCWL,"Bottom champher Left", "BCWL", "Frequency", settings.MEDIA_ROOT + "\\BCWL_"+str(uniqueId)+".png")
-            generateGraphs(BCWR,"Bottom Champher Right", "BCWR", "Frequency", settings.MEDIA_ROOT + "\\BCWR_"+str(uniqueId)+".png")
-            generateGraphs(TotalThickness,"Total Thickness", "TotalThickness", "Frequency", settings.MEDIA_ROOT + "\\TotalThickness_"+str(uniqueId)+".png")
-            generateGraphs(TopTotalWidth,"Total Top Width", "TopTotalWidth", "Frequency", settings.MEDIA_ROOT + "\\TopTotalWidth_"+str(uniqueId)+".png")
-            generateGraphs(BottomTotalWidth,"Total Bottom Width", "BottomTotalWidth", "Frequency", settings.MEDIA_ROOT + "\\BottomTotalWidth_"+str(uniqueId)+".png")
-            generateGraphs(FinalTotalWidth,"Total Width", "FinalTotalWidth", "Frequency", settings.MEDIA_ROOT + "\\FinalTotalWidth_"+str(uniqueId)+".png")
+            generateGraphs(TCWL,"Top Champher Left", "TCWL", "Frequency", settings.MEDIA_ROOT + "\\TCWL_"+str(uniqueId)+".png",measureObj.TopChamferWidthLeft_LDL,measureObj.TopChamferWidthLeft_UDL)
+            generateGraphs(TCWR,"Top Champher Right", "TCWR", "Frequency", settings.MEDIA_ROOT + "\\TCWR_"+str(uniqueId)+".png",measureObj.TopChamferWidthRight_LDL,measureObj.TopChamferWidthRight_UDL)
+            generateGraphs(BCWL,"Bottom champher Left", "BCWL", "Frequency", settings.MEDIA_ROOT + "\\BCWL_"+str(uniqueId)+".png",measureObj.BottomChamferWidthLeft_LDL,measureObj.BottomChamferWidthLeft_UDL)
+            generateGraphs(BCWR,"Bottom Champher Right", "BCWR", "Frequency", settings.MEDIA_ROOT + "\\BCWR_"+str(uniqueId)+".png",measureObj.BottomChamferWidthRight_LDL,measureObj.BottomChamferWidthRight_UDL)
+            generateGraphs(ThicknessLeft,"Thickness Left", "Thickness Left", "Frequency", settings.MEDIA_ROOT + "\\TotalThickness_"+str(uniqueId)+".png",measureObj.ThicknessLeft_LDL,measureObj.ThicknessLeft_UDL)
+            generateGraphs(TopWidth,"Top Width", "Top Width", "Frequency", settings.MEDIA_ROOT + "\\TopTotalWidth_"+str(uniqueId)+".png",measureObj.TopWidth_LDL,measureObj.TopWidth_UDL)
+            generateGraphs(BottomWidth,"Bottom Width", "Bottom Width", "Frequency", settings.MEDIA_ROOT + "\\BottomTotalWidth_"+str(uniqueId)+".png",measureObj.BottomWidth_LDL,measureObj.BottomWidth_UDL)
+            generateGraphs(ThicknessRight,"Thickness Right", "Thickness Right", "Frequency", settings.MEDIA_ROOT + "\\FinalTotalWidth_"+str(uniqueId)+".png",measureObj.ThicknessRight_LDL,measureObj.ThicknessRight_UDL)
         except Exception as e:
             print(e)
             response = HttpResponse('some data')
