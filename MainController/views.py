@@ -75,20 +75,20 @@ def getGraphs(request):
             for f in os.listdir(settings.MEDIA_ROOT):
                 os.remove(os.path.join(settings.MEDIA_ROOT, f))
             uniqueId = uuid4()
-            generateGraphs(TCWL,"Top Champher Left", "TCWL", "Frequency", settings.MEDIA_ROOT + "\\TCWL_"+str(uniqueId)+".png",measureObj.TopChamferWidthLeft_LDL,measureObj.TopChamferWidthLeft_UDL)
-            generateGraphs(TCWR,"Top Champher Right", "TCWR", "Frequency", settings.MEDIA_ROOT + "\\TCWR_"+str(uniqueId)+".png",measureObj.TopChamferWidthRight_LDL,measureObj.TopChamferWidthRight_UDL)
-            generateGraphs(BCWL,"Bottom champher Left", "BCWL", "Frequency", settings.MEDIA_ROOT + "\\BCWL_"+str(uniqueId)+".png",measureObj.BottomChamferWidthLeft_LDL,measureObj.BottomChamferWidthLeft_UDL)
-            generateGraphs(BCWR,"Bottom Champher Right", "BCWR", "Frequency", settings.MEDIA_ROOT + "\\BCWR_"+str(uniqueId)+".png",measureObj.BottomChamferWidthRight_LDL,measureObj.BottomChamferWidthRight_UDL)
-            generateGraphs(ThicknessLeft,"Thickness Left", "Thickness Left", "Frequency", settings.MEDIA_ROOT + "\\TotalThickness_"+str(uniqueId)+".png",measureObj.ThicknessLeft_LDL,measureObj.ThicknessLeft_UDL)
-            generateGraphs(TopWidth,"Top Width", "Top Width", "Frequency", settings.MEDIA_ROOT + "\\TopTotalWidth_"+str(uniqueId)+".png",measureObj.TopWidth_LDL,measureObj.TopWidth_UDL)
-            generateGraphs(BottomWidth,"Bottom Width", "Bottom Width", "Frequency", settings.MEDIA_ROOT + "\\BottomTotalWidth_"+str(uniqueId)+".png",measureObj.BottomWidth_LDL,measureObj.BottomWidth_UDL)
-            generateGraphs(ThicknessRight,"Thickness Right", "Thickness Right", "Frequency", settings.MEDIA_ROOT + "\\FinalTotalWidth_"+str(uniqueId)+".png",measureObj.ThicknessRight_LDL,measureObj.ThicknessRight_UDL)
+            generateGraphs(TCWL,"Top Chamfer Left", "TCWL", "Frequency", settings.MEDIA_ROOT + "\\TCWL_"+str(uniqueId)+".png",measureObj.TopChamferWidthLeft_LDL,measureObj.TopChamferWidthLeft_UDL)
+            generateGraphs(TCWR,"Top Chamfer Right", "TCWR", "Frequency", settings.MEDIA_ROOT + "\\TCWR_"+str(uniqueId)+".png",measureObj.TopChamferWidthRight_LDL,measureObj.TopChamferWidthRight_UDL)
+            generateGraphs(BCWL,"Bottom Chamfer Left", "BCWL", "Frequency", settings.MEDIA_ROOT + "\\BCWL_"+str(uniqueId)+".png",measureObj.BottomChamferWidthLeft_LDL,measureObj.BottomChamferWidthLeft_UDL)
+            generateGraphs(BCWR,"Bottom Chamfer Right", "BCWR", "Frequency", settings.MEDIA_ROOT + "\\BCWR_"+str(uniqueId)+".png",measureObj.BottomChamferWidthRight_LDL,measureObj.BottomChamferWidthRight_UDL)
+            generateGraphs(ThicknessLeft,"Thickness Left", "Thickness Left", "Frequency", settings.MEDIA_ROOT + "\\ThicknessLeft_"+str(uniqueId)+".png",measureObj.ThicknessLeft_LDL,measureObj.ThicknessLeft_UDL)
+            generateGraphs(ThicknessRight,"Thickness Right", "Thickness Right", "Frequency", settings.MEDIA_ROOT + "\\ThicknessRight_"+str(uniqueId)+".png",measureObj.ThicknessRight_LDL,measureObj.ThicknessRight_UDL)
+            generateGraphs(TopWidth,"Top Width", "Top Width", "Frequency", settings.MEDIA_ROOT + "\\TopWidth_"+str(uniqueId)+".png",measureObj.TopWidth_LDL,measureObj.TopWidth_UDL)
+            generateGraphs(BottomWidth,"Bottom Width", "Bottom Width", "Frequency", settings.MEDIA_ROOT + "\\BottomWidth_"+str(uniqueId)+".png",measureObj.BottomWidth_LDL,measureObj.BottomWidth_UDL)
         except Exception as e:
             print(e)
             response = HttpResponse('some data')
             response.status_code = 500  # sample status code
             return response
-        responseData = ["TCWL_"+str(uniqueId)+".png","TCWR_"+str(uniqueId)+".png","BCWL_"+str(uniqueId)+".png","BCWR_"+str(uniqueId)+".png","TotalThickness_"+str(uniqueId)+".png","TopTotalWidth_"+str(uniqueId)+".png","BottomTotalWidth_"+str(uniqueId)+".png","FinalTotalWidth_"+str(uniqueId)+".png"]
+        responseData = ["TCWL_"+str(uniqueId)+".png","TCWR_"+str(uniqueId)+".png","BCWL_"+str(uniqueId)+".png","BCWR_"+str(uniqueId)+".png","ThicknessLeft_"+str(uniqueId)+".png","ThicknessRight_"+str(uniqueId)+".png","TopWidth_"+str(uniqueId)+".png","BottomWidth_"+str(uniqueId)+".png"]
         return JsonResponse(responseData, safe=False)
 
 

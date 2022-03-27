@@ -21,7 +21,7 @@ $(document).ready(function() {
                 const parsedResponse = JSON.parse(response);
                 console.log(parsedResponse)
                 for(var i =0; i< parsedResponse.length;i++){
-                    document.getElementById("filtered-list").innerHTML += "<a onclick='listClick("+parsedResponse[i].fields.ID+")' class='list-group-item list-group-item-action'>"+"<b>Plank ID:</b> "+parsedResponse[i].fields.ID+" <br><b>Mode:</b> "+parsedResponse[i].fields.Mode+"</a>";
+                    document.getElementById("filtered-list").innerHTML += "<a id=plank-"+parsedResponse[i].fields.ID+" onclick='listClick("+parsedResponse[i].fields.ID+")' class='list-group-item list-group-item-action'>"+"<b>Plank ID:</b> "+parsedResponse[i].fields.ID+" <br><b>Mode:</b> "+parsedResponse[i].fields.Mode+"</a>";
                 }
                 
             },
@@ -35,6 +35,8 @@ $(document).ready(function() {
 });
 
 function listClick(id) {
+    $("#filtered-list>a.active").removeClass("active");
+    $("#filtered-list #plank-"+id).addClass("active");
     document.getElementById("plot_gallery").innerHTML="";
     document.getElementById("nomatch").hidden = true;
     document.getElementById("loading").hidden = false;
